@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Drone Anti-Oiseaux | Protection des cultures par IA – Plaine du Gharb, Maroc</title>
-    <meta name="description" content="Drone autonome à énergie solaire détectant les moineaux domestiques par IA (50-300m) pour protéger les céréales dans la Plaine du Gharb (Maroc). Modèle économique basé sur la location ou l'achat.">
+    <title>Drone Anti-Oiseaux | Protection des céréales par IA – Plaine du Gharb, Maroc</title>
+    <meta name="description" content="Drone autonome à énergie solaire détectant les moineaux domestiques par IA (50-300m) pour protéger les céréales dans la Plaine du Gharb. Diagnostic ONSSA et proposition de phase pilote.">
     <style>
         * {
             margin: 0;
@@ -140,36 +140,6 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        .problem-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        .stat-card .big-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2e7d5e;
-        }
-        .damage-bar {
-            background: #e0e7e3;
-            height: 20px;
-            border-radius: 10px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-        .damage-fill {
-            height: 100%;
-            background: #d4a11e;
-            border-radius: 10px;
-        }
         .solution-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -267,24 +237,6 @@
             font-size: 3rem;
             font-weight: 700;
         }
-        .features-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1rem;
-            list-style: none;
-        }
-        .features-list li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .features-list li::before {
-            content: "✓";
-            color: #2e7d5e;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
         footer {
             background: #1e3a2f;
             color: white;
@@ -358,6 +310,7 @@
         </div>
     </nav>
     <main id="main-content">
+        <!-- Hero -->
         <section class="hero" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
@@ -402,45 +355,57 @@
                             <span>🔊 Actif</span>
                         </div>
                         <div class="detection-item">
-                            <span>🌾 Graines consommées : blé 29,65% • orge 74,53%</span>
-                            <span>Réf. bibliographique</span>
+                            <span>🌾 Consommation : 74,5% orge • 29,7% blé</span>
+                            <span>Réf. Hanane, 2014</span>
                         </div>
                     </div>
                     <div style="margin-top: 1rem; font-size: 0.9rem;">⚡ Énergie solaire • Autonome • Non-létal</div>
                 </div>
             </div>
         </section>
-        <section id="probleme" aria-labelledby="probleme-title">
+
+        <!-- Section Problème : deux cartes verticales (Maroc + Afrique) -->
+        <section id="probleme" style="background: white; padding: 4rem 0;">
             <div class="container">
                 <div class="section-title">
-                    <h2 id="probleme-title">Le Problème : Dégâts agricoles et part des oiseaux</h2>
-                    <p>Pertes globales sur céréales et impact spécifique du moineau domestique</p>
+                    <h2>🐦 Le problème : dégâts aviaires en agriculture</h2>
+                    <p>Un phénomène réel, reconnu, mais encore non quantifié au Maroc</p>
                 </div>
-                <div class="problem-stats">
-                    <div class="stat-card">
-                        <div class="big-number">10-15%</div>
-                        <p>Pertes globales sur céréales (toutes causes)</p>
-                        <div class="damage-bar"><div class="damage-fill" style="width: 15%"></div></div>
-                        <small>Source : FAO / Enquêtes nationales</small>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                    <!-- Carte 1 : Maroc -->
+                    <div style="background: #f8f9fa; border-radius: 20px; padding: 1.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                        <h3 style="color: #2e7d5e; margin-bottom: 1rem;">🇲🇦 1. Situation au Maroc</h3>
+                        <p>L'<strong>ONSSA</strong> reconnaît officiellement les moineaux comme ravageurs agricoles, capables de <strong>« rendre les récoltes inutiles »</strong> sur céréales (blé, orge), tournesol et cultures maraîchères.</p>
+                        <p>L'étude d'<strong>Hanane (2014)</strong> confirme une consommation massive de céréales : <strong>74,5 % d'orge</strong> et <strong>29,7 % de blé</strong>.</p>
+                        <div style="background: #fff3e0; padding: 1rem; border-left: 4px solid #d4a11e; margin: 1rem 0;">
+                            <strong>❗ Problème central :</strong><br>
+                            Aucune quantification nationale consolidée des pertes dues aux oiseaux. Les dégâts sont observés localement, intégrés dans les bilans globaux, mais <strong>jamais isolés par culture ni par région</strong>.
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="big-number">8-12%</div>
-                        <p>Dont pertes <strong>directement dues aux oiseaux</strong></p>
-                        <div class="damage-bar"><div class="damage-fill" style="width: 12%; background: #c0392b;"></div></div>
-                        <small>Moineau domestique principal responsable</small>
+
+                    <!-- Carte 2 : Afrique -->
+                    <div style="background: #f0f9f4; border-radius: 20px; padding: 1.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                        <h3 style="color: #2e7d5e; margin-bottom: 1rem;">🌍 2. Référence continentale (Afrique)</h3>
+                        <p><strong>FAO</strong> : les pertes attribuables au <em>Quelea quelea</em> dépassent <strong>50 M$</strong> à <strong>88,6 M$/an</strong>.</p>
+                        <p>Dans les zones semi-arides : <strong>15 à 20 %</strong> des dégâts sur céréales sont dus aux oiseaux granivores.</p>
+                        <p>Population estimée : <strong>1,5 milliard d'adultes</strong> (ravageur aviaire n°1 en Afrique).</p>
+                        
+                        <!-- Phrase clé mise en avant -->
+                        <div style="background: #2e7d5e; color: white; border-radius: 15px; padding: 1.2rem; text-align: center; margin: 1rem 0;">
+                            <p style="font-size: 1.2rem; font-weight: 700; margin: 0;">🌟 L'Afrique offre un ordre de grandeur de ce qui est potentiellement sous-estimé au Maroc. 🌟</p>
+                        </div>
+
+                        <!-- Phrase finale unique -->
+                        <div style="background: #e8f5e9; border-radius: 12px; padding: 1rem; margin-top: 1rem;">
+                            <p style="margin: 0;">👉 L'absence de quantification nationale, combinée à la réalité des pertes observées en Afrique, montre un <strong>besoin clair de solutions de mesure et de suivi intelligent</strong> pour mieux protéger les cultures.</p>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="big-number">7,2M - 10,8M</div>
-                        <p>Quintaux perdus par saison au Maroc</p>
-                        <small>dont 85-90% imputables aux oiseaux</small>
-                    </div>
-                </div>
-                <div style="text-align: center; font-size: 1.1rem; background: #fff3e0; padding: 1rem; border-radius: 10px;">
-                    📉 Dans la Plaine du Gharb, les pertes dues au moineau domestique représentent <strong>8 à 12% du rendement</strong> – soit <strong>85 000 à 110 000 quintaux</strong> perdus chaque saison sur cette zone.
-                    <div class="source" style="margin-top: 5px;">Calcul basé sur les données de production DRA et les taux de pertes observés</div>
                 </div>
             </div>
         </section>
+
+        <!-- Solution -->
         <section id="solution" style="background: #f0f9f4;" aria-labelledby="solution-title">
             <div class="container">
                 <div class="section-title">
@@ -475,6 +440,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- Tarifs -->
         <section id="tarifs" aria-labelledby="tarifs-title">
             <div class="container">
                 <div class="section-title">
@@ -521,32 +488,71 @@
                 </div>
             </div>
         </section>
-        <section id="innovant" aria-labelledby="innovant-title">
+
+        <!-- Section Pourquoi c'est innovant – version design 2 colonnes -->
+        <section id="innovant" style="background: white; padding: 4rem 0;">
             <div class="container">
                 <div class="section-title">
-                    <h2 id="innovant-title">Pourquoi c'est innovant</h2>
+                    <h2>🚀 Pourquoi c'est innovant</h2>
                     <p>Une rupture technologique adaptée au contexte marocain</p>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                    <ul class="features-list">
-                        <li><strong>Détection avant action</strong> - Pas d'émission aléatoire</li>
-                        <li><strong>Énergie solaire</strong> - Réduction des coûts de maintenance</li>
-                        <li><strong>Modèle service local</strong> - Adapté aux petits agriculteurs</li>
-                        <li><strong>Non-létal</strong> - Respect de la biodiversité</li>
-                        <li><strong>Autonome</strong> - Faible dépendance à la main-d'œuvre</li>
-                        <li><strong>Couverture modulable</strong> - Un drone pour 50 ha</li>
-                        <li><strong>Zone ciblée</strong> - Plaine du Gharb, haut lieu céréalier</li>
-                    </ul>
-                    <div style="background: #f0f9f4; padding: 2rem; border-radius: 15px; text-align: center;">
-                        <div style="font-size: 4rem;">🎯</div>
-                        <p style="font-weight: 600;">Objectif</p>
-                        <p>Réduire les pertes dues aux oiseaux grâce à une dissuasion ciblée et non létale</p>
-                        <hr style="margin: 1rem 0;">
-                        <div>Résultats à évaluer lors d'une phase pilote</div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                    <!-- Colonne gauche : liste des atouts -->
+                    <div style="flex: 1; min-width: 250px; background: #f8f9fa; border-radius: 20px; padding: 2rem;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;">
+                            
+                            <div>
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                                <h3 style="color: #2e7d5e; margin-bottom: 0.25rem;">Détection avant action</h3>
+                                <p style="margin: 0; font-size: 0.9rem;">Pas d’émission aléatoire, uniquement quand les oiseaux sont détectés.</p>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">☀️</div>
+                                <h3 style="color: #2e7d5e; margin-bottom: 0.25rem;">Énergie solaire</h3>
+                                <p style="margin: 0; font-size: 0.9rem;">-60% de coûts de maintenance par rapport aux solutions conventionnelles.</p>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+                                <h3 style="color: #2e7d5e; margin-bottom: 0.25rem;">Modèle service local</h3>
+                                <p style="margin: 0; font-size: 0.9rem;">Adapté aux petits agriculteurs via la location à l’hectare.</p>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🐦</div>
+                                <h3 style="color: #2e7d5e; margin-bottom: 0.25rem;">Non-létal</h3>
+                                <p style="margin: 0; font-size: 0.9rem;">Respect de la biodiversité, pas de poison ni de destruction.</p>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤖</div>
+                                <h3 style="color: #2e7d5e; margin-bottom: 0.25rem;">Autonome</h3>
+                                <p style="margin: 0; font-size: 0.9rem;">0 dépendance à la main-d’œuvre, vol programmé et recharge solaire.</p>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌾</div>
+                                <h3 style="color: #2e7d5e; margin-bottom: 0.25rem;">Couverture modulable</h3>
+                                <p style="margin: 0; font-size: 0.9rem;">Un drone couvre 50 hectares, extensible selon les besoins.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colonne droite : encadré efficacité -->
+                    <div style="flex: 0.6; min-width: 250px; background: linear-gradient(135deg, #2e7d5e 0%, #1e3a2f 100%); color: white; border-radius: 20px; padding: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📊</div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">8-12%</h3>
+                        <p style="font-size: 1.2rem; font-weight: 500;">de pertes évitées</p>
+                        <hr style="width: 50px; margin: 1rem auto; border-color: rgba(255,255,255,0.3);">
+                        <p style="margin: 0; font-size: 0.9rem;">Objectif mesurable lors de la phase pilote dans la Plaine du Gharb.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Conclusion -->
         <section style="background: linear-gradient(135deg, #1e3a2f 0%, #2e7d5e 100%); color: white; text-align: center;">
             <div class="container">
                 <h2 style="font-size: 2rem; margin-bottom: 2rem;">Une solution simple, efficace en théorie, à tester sur le terrain</h2>
@@ -556,12 +562,13 @@
                     <div><span style="font-size: 2rem; font-weight: 700;">50 ha</span><br>par drone</div>
                 </div>
                 <div style="margin-top: 2rem;">
-                    <p style="font-size: 0.85rem;">Données : Ministère de l'Agriculture (2025-2026), Direction Régionale de Rabat-Salé-Kénitra. Performances réelles à valider en conditions réelles.</p>
+                    <p style="font-size: 0.85rem;">Données : Ministère de l'Agriculture (2025-2026), DRA Rabat-Salé-Kénitra, Hanane (2014), ONSSA – performances réelles à valider en phase pilote.</p>
                 </div>
                 <div style="margin-top: 2rem;"><a href="#contact" class="btn" style="background: #d4a11e; color: #1e3a2f;">Demander un devis personnalisé</a></div>
             </div>
         </section>
     </main>
+
     <footer id="contact">
         <div class="container">
             <div class="footer-grid">
@@ -588,7 +595,7 @@
             </div>
             <div class="footer-bottom">
                 <p>© 2026 Drone Anti-Oiseaux – Proposé par abel.same@centrale-casablanca.ma – Tous droits réservés</p>
-                <p style="font-size: 0.75rem; margin-top: 0.5rem;">Sources : Ministère de l'Agriculture (campagne 2025-2026), Direction Régionale de l'Agriculture Rabat-Salé-Kénitra. Les chiffres d'efficacité et de réduction des pertes sont des estimations théoriques ; une validation par une phase pilote est nécessaire.</p>
+                <p style="font-size: 0.75rem; margin-top: 0.5rem;">Sources : Ministère de l'Agriculture, DRA Rabat-Salé-Kénitra, Hanane (2014), ONSSA. Une phase pilote est indispensable pour quantifier l'impact réel des oiseaux au Maroc.</p>
             </div>
         </div>
     </footer>
