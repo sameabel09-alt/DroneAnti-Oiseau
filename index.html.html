@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Drone Anti-Oiseaux | Protection des cultures par IA – Plaine du Gharb, Maroc</title>
+    <meta name="description" content="Drone autonome à énergie solaire détectant les moineaux domestiques par IA (50-300m) pour protéger les céréales dans la Plaine du Gharb (Maroc). Modèle économique basé sur la location ou l'achat.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :focus-visible {
+            outline: 3px solid #ffc107;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        body {
+            background-color: #f5f9f0;
+            color: #1e3a2f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        nav {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2e7d5e;
+        }
+        .logo span {
+            color: #d4a11e;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3a2f;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #2e7d5e;
+            text-decoration: underline;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1e3a2f 0%, #2e7d5e 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffd966;
+        }
+        .drone-card {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .detection-box {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: monospace;
+            margin-top: 1rem;
+        }
+        .detection-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2rem;
+            color: #1e3a2f;
+            margin-bottom: 1rem;
+        }
+        .section-title p {
+            color: #2c5a4a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .problem-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .stat-card .big-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2e7d5e;
+        }
+        .damage-bar {
+            background: #e0e7e3;
+            height: 20px;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .damage-fill {
+            height: 100%;
+            background: #d4a11e;
+            border-radius: 10px;
+        }
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+        .solution-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .solution-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .pricing-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        .pricing-card.featured {
+            border: 2px solid #2e7d5e;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9f4 100%);
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2e7d5e;
+            margin: 1rem 0;
+        }
+        .price small {
+            font-size: 1rem;
+            color: #5a7b6a;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: #2e7d5e;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover, .btn:focus-visible {
+            background: #1e3a2f;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2e7d5e;
+            color: #2e7d5e;
+        }
+        .btn-outline:hover, .btn-outline:focus-visible {
+            background: #2e7d5e;
+            color: white;
+        }
+        .roi-calculator {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 3rem;
+        }
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+        .savings-badge {
+            background: #2e7d5e;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .savings-number {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            list-style: none;
+        }
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .features-list li::before {
+            content: "✓";
+            color: #2e7d5e;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        footer {
+            background: #1e3a2f;
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 200;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+        .source {
+            font-size: 0.7rem;
+            color: #5a7b6a;
+            margin-top: 0.25rem;
+        }
+        @media (max-width: 768px) {
+            .hero .container { flex-direction: column; }
+            .nav-links { gap: 1rem; justify-content: center; margin-top: 0.5rem; }
+            .hero-content h1 { font-size: 2rem; }
+            .stat-number { font-size: 1.5rem; }
+            section { padding: 2rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+    <nav aria-label="Navigation principale">
+        <div class="container">
+            <div class="logo">Drone<span>Anti-Oiseaux</span></div>
+            <ul class="nav-links" role="list">
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#probleme">Problème</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#innovant">Pourquoi c'est innovant</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main id="main-content">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="hero-title">Protection des cultures par intelligence artificielle</h1>
+                    <p>Zone pilote : Plaine du Gharb – Région Rabat-Salé-Kénitra</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">3,9 M ha</div>
+                            <div>Superficie céréalière nationale</div>
+                            <div class="source">Source : Ministère de l'Agriculture (2025-2026)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">90 M qx</div>
+                            <div>Production annuelle nationale</div>
+                            <div class="source">Source : Ministère de l'Agriculture (2025-2026)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">23%</div>
+                            <div>Part de la région Rabat-Salé-Kénitra</div>
+                            <div class="source">Source : Direction Régionale (DRA) 2025</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">530 000 ha</div>
+                            <div>Céréales Plaine du Gharb</div>
+                            <div class="source">Source : DRA Rabat-Salé-Kénitra</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="drone-card">
+                    <h3>🛸 Détection IA en temps réel</h3>
+                    <div class="detection-box">
+                        <div class="detection-item">
+                            <span>🐦 Moineau domestique (Passer domesticus L.)</span>
+                            <span>12 détectés</span>
+                        </div>
+                        <div class="detection-item">
+                            <span>📍 Parcelle G-23 – Plaine du Gharb</span>
+                            <span>Confiance 98%</span>
+                        </div>
+                        <div class="detection-item">
+                            <span>⚡ Action : Émission sonore</span>
+                            <span>🔊 Actif</span>
+                        </div>
+                        <div class="detection-item">
+                            <span>🌾 Graines consommées : blé 29,65% • orge 74,53%</span>
+                            <span>Réf. bibliographique</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem;">⚡ Énergie solaire • Autonome • Non-létal</div>
+                </div>
+            </div>
+        </section>
+        <section id="probleme" aria-labelledby="probleme-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="probleme-title">Le Problème : Dégâts agricoles et part des oiseaux</h2>
+                    <p>Pertes globales sur céréales et impact spécifique du moineau domestique</p>
+                </div>
+                <div class="problem-stats">
+                    <div class="stat-card">
+                        <div class="big-number">10-15%</div>
+                        <p>Pertes globales sur céréales (toutes causes)</p>
+                        <div class="damage-bar"><div class="damage-fill" style="width: 15%"></div></div>
+                        <small>Source : FAO / Enquêtes nationales</small>
+                    </div>
+                    <div class="stat-card">
+                        <div class="big-number">8-12%</div>
+                        <p>Dont pertes <strong>directement dues aux oiseaux</strong></p>
+                        <div class="damage-bar"><div class="damage-fill" style="width: 12%; background: #c0392b;"></div></div>
+                        <small>Moineau domestique principal responsable</small>
+                    </div>
+                    <div class="stat-card">
+                        <div class="big-number">7,2M - 10,8M</div>
+                        <p>Quintaux perdus par saison au Maroc</p>
+                        <small>dont 85-90% imputables aux oiseaux</small>
+                    </div>
+                </div>
+                <div style="text-align: center; font-size: 1.1rem; background: #fff3e0; padding: 1rem; border-radius: 10px;">
+                    📉 Dans la Plaine du Gharb, les pertes dues au moineau domestique représentent <strong>8 à 12% du rendement</strong> – soit <strong>85 000 à 110 000 quintaux</strong> perdus chaque saison sur cette zone.
+                    <div class="source" style="margin-top: 5px;">Calcul basé sur les données de production DRA et les taux de pertes observés</div>
+                </div>
+            </div>
+        </section>
+        <section id="solution" style="background: #f0f9f4;" aria-labelledby="solution-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="solution-title">Notre Solution : Drone Intelligent & Autonome</h2>
+                    <p>Détection IA + Énergie solaire + Réaction ciblée</p>
+                </div>
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <div class="solution-icon" aria-hidden="true">🔍</div>
+                        <h3>Détection IA</h3>
+                        <p>Caméra RGB + YOLOv8 – détection fiable des oiseaux de <strong>50 m à 300 m</strong></p>
+                        <strong>Précision > 95%</strong>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon" aria-hidden="true">📢</div>
+                        <h3>Réaction ciblée</h3>
+                        <p>Émission uniquement quand oiseaux détectés (cris de détresse)</p>
+                        <strong>Temps de réponse < 0,5 s</strong>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon" aria-hidden="true">☀️</div>
+                        <h3>Énergie hybride</h3>
+                        <p>Panneau solaire 50W + batterie Li-ion = autonomie prolongée</p>
+                        <strong>Recharge solaire continue</strong>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-icon" aria-hidden="true">🤖</div>
+                        <h3>Autonome</h3>
+                        <p>Vol programmé GPS, retour automatique, recharge solaire</p>
+                        <strong>50 ha couverts par drone</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="tarifs" aria-labelledby="tarifs-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="tarifs-title">Modèle Économique – Prix adaptés au Maroc</h2>
+                    <p>Deux options pour les agriculteurs marocains</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Achat</h3>
+                        <div class="price">8 000 - 20 000 DH</div>
+                        <p>+ 600-1 500 DH/an maintenance & batterie</p>
+                        <p style="margin: 1rem 0; color: #2e7d5e; font-weight: 600;">ROI estimé : 1 à 2 saisons</p>
+                        <p>Rentabilisation prévisionnelle</p>
+                        <a href="#" class="btn btn-outline">Choisir achat</a>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3>Location</h3>
+                        <div class="price">50 DH <small>/ha/saison</small></div>
+                        <p style="font-size: 1.2rem;">50 ha = 2 500 DH/saison</p>
+                        <p>✓ 0 achat initial</p>
+                        <p>✓ Flexible & accessible</p>
+                        <a href="#" class="btn">Choisir location</a>
+                    </div>
+                </div>
+                <div class="roi-calculator">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">Estimation de rentabilité pour 50 ha de céréales dans la Plaine du Gharb</h3>
+                    <div class="calculator-grid">
+                        <div>
+                            <p><span>Coût actuel (gardien) :</span> <strong>17 500 DH/saison</strong></p>
+                            <p><span>Drone (location) :</span> <strong>2 500 DH/saison</strong></p>
+                            <p style="border-top:2px solid #eee; margin-top:1rem; padding-top:1rem;"><span>Économies potentielles :</span> <strong>15 000 DH/saison</strong></p>
+                            <p><span>Achat (prix moyen 14 000 DH, amorti sur 3 ans) :</span> <strong>~4 700 DH/an</strong></p>
+                            <p style="background:#e8f5e9; padding:0.5rem; border-radius:8px;"><span>Économies estimées avec achat :</span> <strong>12 800 DH la 1ʳᵉ année, puis 17 500 DH/an</strong></p>
+                        </div>
+                        <div class="savings-badge">
+                            <div>Gain potentiel</div>
+                            <div class="savings-number">86%</div>
+                            <div>vs gardien humain</div>
+                            <hr style="margin:1rem 0;">
+                            <div>+ 0 perte liée à l'absentéisme</div>
+                        </div>
+                    </div>
+                    <div class="source" style="text-align: center; margin-top: 1rem;">Calcul sur la base des coûts de main-d'œuvre locaux et du tarif de location proposé. Résultats à confirmer sur le terrain.</div>
+                </div>
+            </div>
+        </section>
+        <section id="innovant" aria-labelledby="innovant-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="innovant-title">Pourquoi c'est innovant</h2>
+                    <p>Une rupture technologique adaptée au contexte marocain</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <ul class="features-list">
+                        <li><strong>Détection avant action</strong> - Pas d'émission aléatoire</li>
+                        <li><strong>Énergie solaire</strong> - Réduction des coûts de maintenance</li>
+                        <li><strong>Modèle service local</strong> - Adapté aux petits agriculteurs</li>
+                        <li><strong>Non-létal</strong> - Respect de la biodiversité</li>
+                        <li><strong>Autonome</strong> - Faible dépendance à la main-d'œuvre</li>
+                        <li><strong>Couverture modulable</strong> - Un drone pour 50 ha</li>
+                        <li><strong>Zone ciblée</strong> - Plaine du Gharb, haut lieu céréalier</li>
+                    </ul>
+                    <div style="background: #f0f9f4; padding: 2rem; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 4rem;">🎯</div>
+                        <p style="font-weight: 600;">Objectif</p>
+                        <p>Réduire les pertes dues aux oiseaux grâce à une dissuasion ciblée et non létale</p>
+                        <hr style="margin: 1rem 0;">
+                        <div>Résultats à évaluer lors d'une phase pilote</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="background: linear-gradient(135deg, #1e3a2f 0%, #2e7d5e 100%); color: white; text-align: center;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 2rem;">Une solution simple, efficace en théorie, à tester sur le terrain</h2>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div><span style="font-size: 2rem; font-weight: 700;">💰 -86%</span><br>coût vs gardien (estimation)</div>
+                    <div><span style="font-size: 2rem; font-weight: 700;">🌍</span><br>Non-létal</div>
+                    <div><span style="font-size: 2rem; font-weight: 700;">50 ha</span><br>par drone</div>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <p style="font-size: 0.85rem;">Données : Ministère de l'Agriculture (2025-2026), Direction Régionale de Rabat-Salé-Kénitra. Performances réelles à valider en conditions réelles.</p>
+                </div>
+                <div style="margin-top: 2rem;"><a href="#contact" class="btn" style="background: #d4a11e; color: #1e3a2f;">Demander un devis personnalisé</a></div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Drone Anti-Oiseaux</h4>
+                    <p>Protection des cultures par IA<br>Zone pilote : Plaine du Gharb (Rabat-Salé-Kénitra)</p>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li>✉️ <a href="mailto:abel.same@centrale-casablanca.ma">abel.same@centrale-casablanca.ma</a></li>
+                        <li>📞 <a href="tel:+212763381155">+212 763 381 155</a></li>
+                        <li>📍 Bouskoura, Casablanca, Maroc</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Liens utiles</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Mentions légales</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Drone Anti-Oiseaux – Proposé par abel.same@centrale-casablanca.ma – Tous droits réservés</p>
+                <p style="font-size: 0.75rem; margin-top: 0.5rem;">Sources : Ministère de l'Agriculture (campagne 2025-2026), Direction Régionale de l'Agriculture Rabat-Salé-Kénitra. Les chiffres d'efficacité et de réduction des pertes sont des estimations théoriques ; une validation par une phase pilote est nécessaire.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
